@@ -6,30 +6,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<img class="h-[200px] w-full" src="/images/banner.jpg">
-<div class="m-4">
-    <h1 class="text-3xl text-center">
-        Human Resources
-    </h1>
-
-    <div class="text-center m-12">
-        <a href="/"
-           class="text-white mx-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 p-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Home</a>
-        <a href="/emps/show"
-           class="text-white mx-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 p-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Manage
-            Employees</a>
-
-        <a href="/dept/show"
-           class="text-white mx-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 p-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Manage
-            Departments</a>
-
-        <a href="/jobs/show"
-           class="text-white mx-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 p-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Manage
-            Jobs</a>
-    </div>
+    <div th:insert="~{header}"></div>
     <div class="m-4">
-
-        <form class="max-w-md mx-auto my-4" method="post" action="/employee/create">
+        <form class="max-w-md mx-auto my-4" method="post" action="/emps/create">
             <h2 class="text-xl">
                 Add New Employee
             </h2>
@@ -51,6 +30,7 @@
                         name</label>
                 </div>
             </div>
+            <div class="grid md:grid-cols-2 md:gap-6">
             <div class="relative z-0 w-full mb-5 group">
                 <input type="email" name="email" id="email"
                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer"
@@ -59,8 +39,6 @@
                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
                     address</label>
             </div>
-
-            <div class="grid md:grid-cols-2 md:gap-6">
                 <div class="relative z-0 w-full mb-5 group">
                     <input type="tel" name="phone" id="phone"
                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer"
@@ -68,6 +46,21 @@
                     <label for="phone"
                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
                         number (123-456-7890)</label>
+                </div>
+
+            </div>
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 w-full mb-5 group">
+                    <select name="department_id" id="department_id" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-red-500 focus:outline-none focus:ring-0 focus:border-red-600 peer">
+                        <option>Choose Department</option>
+                        <th:block th:each="dept : ${depts}">
+                            <option th:value="${dept.getId()}"  th:text="${dept.getName()}"></option>
+                        </th:block>
+
+                    </select>
+                    <label for="department_id"
+                           class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                        Department</label>
                 </div>
                 <div class="relative z-0 w-full mb-5 group">
                     <input type="text" name="job" id="job"
@@ -85,5 +78,6 @@
 
     </div>
 
+    <div th:insert="~{footer}"></div>
 </body>
 </html>

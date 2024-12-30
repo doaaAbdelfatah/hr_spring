@@ -24,7 +24,7 @@ public class DepatmentController {
         department.setName(name);
         department.setManager(manager);
 
-        department= departmentService.create(department);
+        department= departmentService.save(department);
 
         return  "redirect:/dept/show";
     }
@@ -43,6 +43,23 @@ public class DepatmentController {
     public String delete(@RequestParam(value = "id") int id){
         Department d =  departmentService.get(id);
         departmentService.delete(d);
+        return  "redirect:/dept/show";
+    }
+
+    @GetMapping("/edit")
+    public String edit(Model model , @RequestParam(value = "id") int id ){
+        Department d =  departmentService.get(id);
+        model.addAttribute("dept" , d);
+        return  "dept_edit";
+    }
+
+    @PostMapping("/update")
+    public String update(@RequestParam(value = "id" ) int id , @RequestParam(value = "name") String name
+            ,@RequestParam(value = "manager") String manager ){
+        Department d =  departmentService.get(id);
+        d.setName(name);
+        d.setManager(manager);
+        d= departmentService.save(d);
         return  "redirect:/dept/show";
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/jobs")
 public class JobController {
-
     private JobService jobService;
 
     public JobController(JobService jobService) {

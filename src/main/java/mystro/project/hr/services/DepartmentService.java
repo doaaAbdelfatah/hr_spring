@@ -15,7 +15,7 @@ public class DepartmentService {
         this.departmentRepository = departmentRepository;
     }
 
-    public Department create(Department department){
+    public Department save(Department department){
        return departmentRepository.save(department); // insert into departments (id , name ,manager) values(?,?,?)
     }
 

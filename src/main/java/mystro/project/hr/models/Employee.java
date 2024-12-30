@@ -19,6 +19,10 @@ public class Employee {
     @Column(name = "job")
     private String job;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+
     public int getId() {
         return id;
     }
@@ -77,5 +81,13 @@ public class Employee {
                 ", phone='" + phone + '\'' +
                 ", job='" + job + '\'' +
                 '}';
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
